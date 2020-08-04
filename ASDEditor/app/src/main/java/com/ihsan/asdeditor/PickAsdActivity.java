@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
@@ -16,10 +17,12 @@ import java.util.ArrayList;
 
 public class PickAsdActivity extends AppCompatActivity {
 
-    ArrayList<Integer> lines;
-    ArrayList<Integer> asdlines;
-    ArrayList<JSONObject> datas;
-    ArrayList<String> currents;
+    private static final String TAG = "PickAsdActivity";
+
+    ArrayList<Integer> lines = new ArrayList<>();
+    ArrayList<Integer> asdlines = new ArrayList<>();
+    ArrayList<JSONObject> datas = new ArrayList<>();
+    ArrayList<String> currents = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class PickAsdActivity extends AppCompatActivity {
         Intent i = getIntent();
         String id = i.getStringExtra("id");
         String data = Util.decrypt(Environment.getExternalStorageDirectory() + "/.sketchware/data/" + id + "/logic");
+        Log.d(TAG, "onCreate: " + Environment.getExternalStorageDirectory() + "/.sketchware/data/" + id + "/logic");
         String[] splitted_data = data.split("[\\r\\n]+");
         boolean ignore = false;
         int index = 0;
@@ -41,6 +45,7 @@ public class PickAsdActivity extends AppCompatActivity {
             if (!ignore && line.length() != 0) {
                 if (line.charAt(0) != '@') {
                     try {
+                        Log.d(TAG, "onCreate: line: " + line);
                         JSONObject object = new JSONObject(line);
                         if (!object.isNull("opCode")) {
                             if (object.getString("opCode").equals("addSourceDirectly")) {

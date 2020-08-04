@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.RandomAccessFile;
+import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -61,6 +62,7 @@ public class Util {
         ArrayList<Hashtable<String, String>> sketchwareProjects = new ArrayList<>();
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.sketchware/mysc/list/";
         Log.d(TAG, "getSketchwareProjects: " +path);
+        Log.d(TAG, "getSketchwareProjects: listdir: " + listDir(path).toString());
         for (String pat: listDir(path)) {
             try {
                 Log.d(TAG, "getSketchwareProjects: " + pat + "/project");

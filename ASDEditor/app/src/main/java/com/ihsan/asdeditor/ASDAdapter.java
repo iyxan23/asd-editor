@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ public class ASDAdapter extends RecyclerView.Adapter<ASDAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_item_project, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_asd_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -53,7 +54,7 @@ public class ASDAdapter extends RecyclerView.Adapter<ASDAdapter.ViewHolder> {
         holder.body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(activity, PickAsdActivity.class);
+                Intent i = new Intent(activity, EditorActivity.class);
                 ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeClipRevealAnimation(holder.body, 0, 0, holder.body.getMeasuredWidth(), holder.body.getMeasuredHeight());
                 i.putExtra("line", asdlines.get(position).toString());
                 i.putExtra("id", id);
