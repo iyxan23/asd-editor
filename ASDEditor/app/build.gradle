@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
@@ -30,6 +32,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     testImplementation 'junit:junit:4.13'
     def codeEditorVersion = "v3.0.2"
+    implementation "androidx.core:core-ktx:1.3.1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation("com.github.markusressel:KodeEditor:${codeEditorVersion}")
     implementation("com.github.markusressel.KodeHighlighter:core:v2.0.0")
     implementation("com.github.markusressel.KodeHighlighter:java:v2.0.0")

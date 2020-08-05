@@ -1,6 +1,5 @@
 package com.ihsan.asdeditor;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,7 +19,6 @@ import java.io.RandomAccessFile;
 import java.util.Arrays;
 
 import de.markusressel.kodeeditor.library.view.CodeEditorLayout;
-import de.markusressel.kodehighlighter.language.java.JavaRuleBook;
 
 public class EditorActivity extends AppCompatActivity {
 
