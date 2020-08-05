@@ -22,6 +22,7 @@
         android:id="@+id/codeeditor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:ke_divider_color="?android:attr/textColorPrimary"
         app:ke_divider_enabled="true"
         app:ke_editor_backgroundColor="#272822"

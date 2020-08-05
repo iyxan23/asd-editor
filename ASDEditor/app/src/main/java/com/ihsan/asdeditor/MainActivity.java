@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,12 +33,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
+
         storagePerms();
 
         RecyclerView rv = findViewById(R.id.rv_projs);
         rv.setAdapter(new ProjectsAdapter(data, this));
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setHasFixedSize(true);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false)
+                .setTitle("WARNING")
+                .setMessage("This app is still in development, any bug may corrupt your project's logic. For safety purposes, please backup your project before using this app, I really recommend using SH Recovery.")
+                .setPositiveButton("I know what i'm doing!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Wait, let me backup first", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finishAndRemoveTask();
+                    }
+                })
+                .setNeutralButton("Never show this again", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        sp.edit().putBoolean("dialog_warn_1_never", true).apply();
+                    }
+                });
+        if (!sp.getBoolean("dialog_warn_1_never", false)) {
+            builder.show();
+        }
     }
 
     private void storagePerms() {

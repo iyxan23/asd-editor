@@ -4,16 +4,7 @@ import de.markusressel.kodehighlighter.core.LanguageRuleBook
 import de.markusressel.kodehighlighter.core.colorscheme.ColorScheme
 import de.markusressel.kodehighlighter.core.rule.LanguageRule
 import com.ihsan.asdeditor.colorscheme.DarkBackgroundColorScheme
-import com.ihsan.asdeditor.rule.AnnotationRule
-import com.ihsan.asdeditor.rule.ClassKeywordRule
-import com.ihsan.asdeditor.rule.FinalKeywordRule
-import com.ihsan.asdeditor.rule.ImportKeywordRule
-import com.ihsan.asdeditor.rule.PackageKeywordRule
-import com.ihsan.asdeditor.rule.ReturnKeywordRule
-import com.ihsan.asdeditor.rule.StaticKeywordRule
-import com.ihsan.asdeditor.rule.TypeKeywordRule
-import com.ihsan.asdeditor.rule.VisibilityKeywordRule
-import com.ihsan.asdeditor.rule.CommentRule
+import com.ihsan.asdeditor.rule.*
 
 /**
  * Java language rule book
@@ -32,6 +23,7 @@ class JavaRuleBook : LanguageRuleBook {
                 FinalKeywordRule(),
                 StaticKeywordRule(),
                 ReturnKeywordRule(),
+                AllKeywordsRule(),
                 VisibilityKeywordRule(),
                 CommentRule())
     }

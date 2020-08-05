@@ -75,4 +75,10 @@ public class EditorActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        
+    }
 }

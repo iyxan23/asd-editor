@@ -42,7 +42,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(activity, PickAsdActivity.class);
-                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.project, "project_name_transition");
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeClipRevealAnimation(holder.body, 0, 0, holder.body.getMeasuredWidth(), holder.body.getMeasuredHeight());
                 i.putExtra("id", currentdata.get("id"));
                 i.putExtra("name", currentdata.get("name"));
                 activity.startActivity(i, optionsCompat.toBundle());
