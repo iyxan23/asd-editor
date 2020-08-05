@@ -45,7 +45,8 @@ public class ASDAdapter extends RecyclerView.Adapter<ASDAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.title.setText("ASD line " + lines.get(position).toString() + ", " + currents.get(position));
+        holder.title.setText(currents.get(position));
+        holder.txtline.setText("At line " + lines.get(position).toString());
         try {
             holder.subtitle.setText((String) datas.get(position).getJSONArray("parameters").get(0));
         } catch (JSONException e) {
@@ -72,6 +73,7 @@ public class ASDAdapter extends RecyclerView.Adapter<ASDAdapter.ViewHolder> {
 
         TextView title;
         TextView subtitle;
+        TextView txtline;
         View body;
 
         public ViewHolder(@NonNull View itemView) {
@@ -79,6 +81,7 @@ public class ASDAdapter extends RecyclerView.Adapter<ASDAdapter.ViewHolder> {
             title = itemView.findViewById(R.id.title_item);
             subtitle = itemView.findViewById(R.id.subtitle_item);
             body = itemView.findViewById(R.id.body_asd_item);
+            txtline = itemView.findViewById(R.id.txt_line);
         }
     }
 }

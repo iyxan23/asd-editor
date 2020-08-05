@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/body"
-    android:background="@drawable/ripple"
+    android:background="?android:attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -23,31 +23,41 @@
         android:id="@+id/project"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="16dp"
+        android:transitionName="project_name_transition"
         android:text="Loading project"
-        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/version"
+        android:id="@+id/other"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:text="Loading version"
-        app:layout_constraintEnd_toEndOf="@+id/project"
+        android:layout_marginEnd="4dp"
+        android:text="Loading other data"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/id"
         app:layout_constraintStart_toStartOf="@+id/project"
         app:layout_constraintTop_toBottomOf="@+id/project" />
 
     <View
         android:id="@+id/divider"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="600"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/project"
+        app:layout_constraintTop_toBottomOf="@+id/project" />
 </androidx.constraintlayout.widget.ConstraintLayout>

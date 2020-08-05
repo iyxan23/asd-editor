@@ -89,19 +89,23 @@ public class Util {
             RandomAccessFile randomAccessFile = new RandomAccessFile(path, "r");
             byte[] bArr = new byte[((int) randomAccessFile.length())];
             randomAccessFile.readFully(bArr);
+            Log.d(TAG, "decrypt: Decrypted successfully");
             return new String(instance.doFinal(bArr));
-        } catch (Exception ignored) {}
-        return "ERROR WHILE DECRYPTING";
+        } catch (Exception e) {
+            return "ERROR WHILE DECRYPTING: " + e.toString();
+        }
     }
 
-    public static String encrypt(String str) {
+    public static String encrypt(String str, String path) {
         // The boolean is to determine if the process is successful or not
         try {
             Cipher instance = Cipher.getInstance("AES/CBC/PKCS5Padding");
             byte[] bytes = "sketchwaresecure".getBytes();
             instance.init(1, new SecretKeySpec(bytes, "AES"), new IvParameterSpec(bytes));
             byte[] doFinal = instance.doFinal(str.getBytes());
-            return new String(doFinal);
+            final RandomAccessFile raf = new RandomAccessFile(path, "rw");
+            raf.setLength(0L);
+            raf.write(doFinal);
         } catch (Exception ignored) {}
         return "ERROR WHILE ENCRYPTING";
     }

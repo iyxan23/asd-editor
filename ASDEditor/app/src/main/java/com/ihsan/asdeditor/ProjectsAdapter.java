@@ -12,7 +12,6 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
@@ -37,13 +36,15 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final Hashtable<String, String> currentdata = data.get(position);
         holder.project.setText(currentdata.get("name"));
-        holder.version.setText(currentdata.get("version"));
+        holder.other.setText(currentdata.get("coname") + " • " + currentdata.get("package") + " • " + currentdata.get("version"));
+        holder.id.setText(currentdata.get("id"));
         holder.body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(activity, PickAsdActivity.class);
-                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeClipRevealAnimation(holder.body, 0, 0, holder.body.getMeasuredWidth(), holder.body.getMeasuredHeight());
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.project, "project_name_transition");
                 i.putExtra("id", currentdata.get("id"));
+                i.putExtra("name", currentdata.get("name"));
                 activity.startActivity(i, optionsCompat.toBundle());
             }
         });
@@ -57,14 +58,16 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView project;
-        TextView version;
+        TextView other;
+        TextView id;
         View body;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             project = itemView.findViewById(R.id.project);
-            version = itemView.findViewById(R.id.version);
+            other = itemView.findViewById(R.id.other);
             body = itemView.findViewById(R.id.body);
+            id = itemView.findViewById(R.id.id);
         }
     }
 }

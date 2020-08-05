@@ -52,23 +52,24 @@ public class EditorActivity extends AppCompatActivity {
         }
 
         FloatingActionButton fab = findViewById(R.id.save);
+        code_obj.remove("parameters");
         final JSONObject finalCode_obj = code_obj;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     RandomAccessFile raf = new RandomAccessFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.sketchware/data/" + id + "/logic", "rw");
-                    splitted_data[Integer.parseInt(line)] = finalCode_obj.put("parameters", new JSONArray(new String[] {cv.getText()})).toString();
+                    splitted_data[Integer.parseInt(line)] = finalCode_obj.toString().substring(0, finalCode_obj.toString().length() - 1).concat(", \"parameters\": [\"" + cv.getText() + "\"]}");
                     Log.d(TAG, "onClick: " + Arrays.toString(splitted_data));
                     String result = "";
                     for (String data: splitted_data) {
-                        result = result.concat(result).concat("\n");
+                        result = result.concat(data).concat("\n");
                     }
                     raf.setLength(0L);
-                    Log.d(TAG, "onClick: " + result);
-                    raf.write(result.getBytes());
+                    Log.d(TAG, "onClick: result:" + result);
+                    Util.encrypt(result, Environment.getExternalStorageDirectory().getAbsolutePath() + "/.sketchware/data/" + id + "/logic");
                     Toast.makeText(EditorActivity.this, "Saved", Toast.LENGTH_LONG).show();
-                } catch (IOException | JSONException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                     Toast.makeText(EditorActivity.this, "Error while saving", Toast.LENGTH_LONG).show();
                 }

@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Slide;
+import android.view.Window;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -20,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().setEnterTransition(new Slide());
+        getWindow().setExitTransition(new Slide());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -40,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
                 data = getSketchwareProjects();
             }
         }
+    }
+
+    @Override
+    public void onActivityReenter(int resultCode, Intent ind) {
+        super.onActivityReenter(resultCode, ind);
+        storagePerms();
+        RecyclerView rv = findViewById(R.id.rv_projs);
+        rv.setAdapter(new ProjectsAdapter(data, this));
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setHasFixedSize(true);
     }
 
     @Override
