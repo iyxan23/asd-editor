@@ -59,8 +59,10 @@ public class EditorActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     RandomAccessFile raf = new RandomAccessFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/.sketchware/data/" + id + "/logic", "rw");
-                    splitted_data[Integer.parseInt(line)] = finalCode_obj.toString().substring(0, finalCode_obj.toString().length() - 1).concat(", \"parameters\": [\"" + cv.getText() + "\"]}");
-                    Log.d(TAG, "onClick: " + Arrays.toString(splitted_data));
+                    String linedata = finalCode_obj.toString().substring(0, finalCode_obj.toString().length() - 1).concat(", \"parameters\": [\"" + cv.getText().replaceAll(System.lineSeparator(), "\\\\n") + "\"]}");
+                    Log.d(TAG, "onClick: linedata: " + linedata);
+                    splitted_data[Integer.parseInt(line)] = linedata;
+                    Log.d(TAG, "onClick: splitteddataresult: " + Arrays.toString(splitted_data));
                     String result = "";
                     for (String data: splitted_data) {
                         result = result.concat(data).concat("\n");
