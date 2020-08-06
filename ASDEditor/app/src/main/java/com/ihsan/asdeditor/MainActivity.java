@@ -14,6 +14,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Slide;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Window;
 
 import java.util.ArrayList;
@@ -92,6 +95,26 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1000) {
             data = getSketchwareProjects();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_actionbar_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.info_item_actionbar:
+                Intent i = new Intent(this, AboutActivity.class);
+                startActivity(i);
+                return true;
+            case R.id.settings_item_actionbar:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

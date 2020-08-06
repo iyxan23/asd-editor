@@ -11,7 +11,6 @@ import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -43,8 +42,6 @@ public class PickAsdActivity extends AppCompatActivity {
         Intent i = getIntent();
         id = i.getStringExtra("id");
         name = i.getStringExtra("name");
-        getSupportActionBar().setTitle(name);
-        getSupportActionBar().setSubtitle(id);
         update();
     }
 
@@ -59,8 +56,8 @@ public class PickAsdActivity extends AppCompatActivity {
     }
 
     private void update() {
-        TextView prjname = findViewById(R.id.projectName);
-        prjname.setText(name);
+        getSupportActionBar().setTitle(name);
+        getSupportActionBar().setSubtitle(id);
         String data = Util.decrypt(Environment.getExternalStorageDirectory() + "/.sketchware/data/" + id + "/logic");
         Log.d(TAG, "onCreate: " + Environment.getExternalStorageDirectory() + "/.sketchware/data/" + id + "/logic");
         String[] splitted_data = data.split("\\r?\\n");
