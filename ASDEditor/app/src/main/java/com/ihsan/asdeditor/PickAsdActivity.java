@@ -38,10 +38,13 @@ public class PickAsdActivity extends AppCompatActivity {
         getWindow().setExitTransition(new Slide());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_asd);
+
         // Parse the sketchware logic data structure
         Intent i = getIntent();
         id = i.getStringExtra("id");
         name = i.getStringExtra("name");
+        getSupportActionBar().setTitle(name);
+        getSupportActionBar().setSubtitle(id);
         update();
     }
 
