@@ -73,6 +73,7 @@ public class PickAsdActivity extends AppCompatActivity {
                 if (line.charAt(0) != '@') {
                     try {
                         Log.d(TAG, "onCreate: line: " + line);
+                        Util.logd("PickASD line: " + line);
                         if (line.equals("ERROR WHILE DECRYPTING")) {
                             Toast.makeText(this, "ERROR WHILE DECRYPTING", Toast.LENGTH_LONG).show();
                         }

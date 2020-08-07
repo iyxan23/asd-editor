@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Slide;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -39,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         final SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
 
         storagePerms();
+
+        Util.start(sp);
 
         RecyclerView rv = findViewById(R.id.rv_projs);
         rv.setAdapter(new ProjectsAdapter(data, this));

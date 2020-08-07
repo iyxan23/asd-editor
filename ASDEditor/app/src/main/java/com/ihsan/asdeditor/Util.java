@@ -1,5 +1,7 @@
 package com.ihsan.asdeditor;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
@@ -21,6 +23,40 @@ import javax.crypto.spec.SecretKeySpec;
 public class Util {
     public static Hashtable<String, String> key2name = new Hashtable<>();
     private static final String TAG = "Util";
+    public static SharedPreferences sp;
+
+    public static void start(SharedPreferences sp) {
+        Util.sp = sp;
+    }
+    
+    public static void loge(String data) {
+        if (sp.getInt("time_log", (int) System.currentTimeMillis() * 1000) + 86400 >= (int) System.currentTimeMillis() * 1000) {
+            sp.edit()
+                    .putString("log", "")
+                    .putInt("time_log", (int) System.currentTimeMillis() * 1000 + 86400)
+                    .apply();
+        }
+        sp.edit().putString(sp.getString("log", "") + "E: " + data + "\n", "").apply();
+    }
+
+    public static void logd(String data) {
+        if (sp.getInt("time_log", (int) System.currentTimeMillis() * 1000) + 86400 >= (int) System.currentTimeMillis() * 1000) {
+            sp.edit()
+                    .putString("log", "")
+                    .putInt("time_log", (int) System.currentTimeMillis() * 1000 + 86400)
+                    .apply();
+        }
+        sp.edit().putString(sp.getString("log", "") + "D: " + data + "\n", "").apply();
+    }
+
+    public static void logw(String data) {if (sp.getInt("time_log", (int) System.currentTimeMillis() * 1000) + 86400 >= (int) System.currentTimeMillis() * 1000) {
+        sp.edit()
+                .putString("log", "")
+                .putInt("time_log", (int) System.currentTimeMillis() * 1000 + 86400)
+                .apply();
+        }
+        sp.edit().putString(sp.getString("log", "") + "W: " + data + "\n", "").apply();
+    }
 
     public static String md5(final String s) {
         final String MD5 = "MD5";
@@ -66,6 +102,7 @@ public class Util {
         for (String pat: listDir(path)) {
             try {
                 Log.d(TAG, "getSketchwareProjects: " + pat + "/project");
+                logd("Decrypting " + pat);
                 Hashtable<String, String> data = new Hashtable<>();
                 JSONObject project = new JSONObject(decrypt(pat + "/project"));
                 data.put("name", project.getString("my_app_name"));
@@ -76,6 +113,7 @@ public class Util {
                 sketchwareProjects.add(data);
             } catch (Exception e) {
                 Log.e(TAG, "getSketchwareProjects: " + e.toString());
+                loge("ERROR DECRYPTING: " + e.toString());
             }
         }
         return sketchwareProjects;
@@ -92,6 +130,7 @@ public class Util {
             Log.d(TAG, "decrypt: Decrypted successfully");
             return new String(instance.doFinal(bArr));
         } catch (Exception e) {
+            loge("ERROR DECRYPTING: " + e.toString());
             return "ERROR WHILE DECRYPTING: " + e.toString();
         }
     }
