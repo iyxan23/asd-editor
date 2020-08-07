@@ -30,7 +30,7 @@ public class Util {
     }
     
     public static void loge(String data) {
-        if (sp.getInt("time_log", (int) System.currentTimeMillis() * 1000) + 86400 >= (int) System.currentTimeMillis() * 1000) {
+        if (sp.getInt("time_log", (int) System.currentTimeMillis() * 1000) <= (int) System.currentTimeMillis() * 1000) {
             sp.edit()
                     .putString("log", "")
                     .putInt("time_log", (int) System.currentTimeMillis() * 1000 + 86400)
@@ -40,7 +40,7 @@ public class Util {
     }
 
     public static void logd(String data) {
-        if (sp.getInt("time_log", (int) System.currentTimeMillis() * 1000) + 86400 >= (int) System.currentTimeMillis() * 1000) {
+        if (sp.getInt("time_log", (int) System.currentTimeMillis() * 1000) <= (int) System.currentTimeMillis() * 1000) {
             sp.edit()
                     .putString("log", "")
                     .putInt("time_log", (int) System.currentTimeMillis() * 1000 + 86400)
@@ -49,11 +49,12 @@ public class Util {
         sp.edit().putString(sp.getString("log", "") + "D: " + data + "\n", "").apply();
     }
 
-    public static void logw(String data) {if (sp.getInt("time_log", (int) System.currentTimeMillis() * 1000) + 86400 >= (int) System.currentTimeMillis() * 1000) {
-        sp.edit()
-                .putString("log", "")
-                .putInt("time_log", (int) System.currentTimeMillis() * 1000 + 86400)
-                .apply();
+    public static void logw(String data) {
+        if (sp.getInt("time_log", (int) System.currentTimeMillis() * 1000) <= (int) System.currentTimeMillis() * 1000) {
+            sp.edit()
+                    .putString("log", "")
+                    .putInt("time_log", (int) System.currentTimeMillis() * 1000 + 86400)
+                    .apply();
         }
         sp.edit().putString(sp.getString("log", "") + "W: " + data + "\n", "").apply();
     }

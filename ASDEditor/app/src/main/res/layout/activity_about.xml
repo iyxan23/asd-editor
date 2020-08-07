@@ -46,13 +46,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="0.1beta1"
+        android:text="0.1beta2"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/created"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -83,9 +83,9 @@
         android:text="Yes there is nothing here, i'm too lazy thanks"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintEnd_toEndOf="@+id/created"
+        app:layout_constraintStart_toStartOf="@+id/created"
+        app:layout_constraintTop_toBottomOf="@+id/created" />
 
     <TextView
         android:id="@+id/textView8"
@@ -93,9 +93,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Compatible with Sketchware 3.9.9 (tested)"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintEnd_toEndOf="@+id/created"
+        app:layout_constraintStart_toStartOf="@+id/created"
+        app:layout_constraintTop_toBottomOf="@+id/created" />
 
     <Button
         android:id="@+id/btnvbucks"

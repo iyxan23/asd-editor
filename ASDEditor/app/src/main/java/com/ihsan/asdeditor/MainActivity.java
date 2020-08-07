@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
         final SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
 
-        storagePerms();
-
         Util.start(sp);
+
+        storagePerms();
 
         RecyclerView rv = findViewById(R.id.rv_projs);
         rv.setAdapter(new ProjectsAdapter(data, this));

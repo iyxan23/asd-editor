@@ -45,7 +45,7 @@ public class ASDAdapter extends RecyclerView.Adapter<ASDAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.title.setText(currents.get(position));
+        holder.title.setText(currents.get(position).split("Activity\\.java")[0] + currents.get(position).split("Activity\\.java")[1].replaceAll("_", " "));
         holder.txtline.setText("At line " + lines.get(position).toString());
         try {
             holder.subtitle.setText((String) datas.get(position).getJSONArray("parameters").get(0));
